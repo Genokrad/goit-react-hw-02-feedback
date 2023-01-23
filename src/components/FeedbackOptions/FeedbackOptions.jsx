@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
+import { nanoid } from 'nanoid';
 
 export const FeedbackOptions = ({ options, onLeaveFeedback }) => {
   return (
     <>
       {options.map(option => (
-        <button type="button" onClick={onLeaveFeedback}>
+        <button key={nanoid()} type="button" onClick={onLeaveFeedback}>
           {option}
         </button>
       ))}
@@ -13,6 +14,10 @@ export const FeedbackOptions = ({ options, onLeaveFeedback }) => {
 };
 
 FeedbackOptions.propTypes = {
-  options: PropTypes.string.isRequired,
+  filterContacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      options: PropTypes.string.isRequired,
+    }).isRequired
+  ),
   onLeaveFeedback: PropTypes.func.isRequired,
 };
